@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/tourSearch">
+
+    <fragment
+        android:id="@+id/tourSearch"
+        android:name="com.app.tours.TourSearch"
+        android:label="fragment_tour_search"
+        tools:layout="@layout/fragment_tour_search" />
+</navigation>
