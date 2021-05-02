@@ -1,33 +1,37 @@
 package com.app.tours
 
+import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_tour_search.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TourSearch.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TourSearch : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+     var layoutManager: RecyclerView.LayoutManager?=null
+     var adapter: RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>? = null
+
+
+    private fun twoDigits(n: Int): String? {
+        return if (n <= 9) "0$n" else n.toString()
     }
+
+    private fun showDatePickerDialog(editText: EditText) {
+        val newFragment =
+            DatePickerFragment.newInstance(OnDateSetListener { datePicker, year, month, day ->
+                val selectedDate: String =
+                    twoDigits(day).toString() + "/" + twoDigits(month + 1) + "/" + year
+                editText.setText(selectedDate)
+            })
+        newFragment.show(requireActivity().supportFragmentManager, "datePicker")
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,25 +39,27 @@ class TourSearch : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tour_search, container, false)
+
+
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TourSearch.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TourSearch().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(itemView, savedInstanceState)
+        recyclerView.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(activity)
+            // set the custom adapter to the RecyclerView
+            adapter = RecyclerViewAdapter()
+        }
+        etDateI.setOnClickListener {
+            showDatePickerDialog(etDateI)
+        }
+        etDateF.setOnClickListener {
+            showDatePickerDialog(etDateF)
+        }
     }
+
+
 }
