@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Tours</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tour_search_fragment">Tour Search</string>
     <string name="have_account">Already have an account?</string>
