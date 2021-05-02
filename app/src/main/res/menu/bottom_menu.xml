@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/tourSearch"
         android:icon="@drawable/ic_search"
         android:title="Search" />
     <item
+        android:id="@+id/bottom_favorites"
         android:icon="@drawable/ic_favorites"
         android:title="Favorites" />
     <item
+        android:id="@+id/bottom_reservation"
         android:icon="@drawable/ic_reservation"
         android:title="Reservations" />
     <item
+        android:id="@+id/bottom_notification"
         android:icon="@drawable/ic_notification"
         android:title="Notifications" />
     <item
+        android:id="@+id/loginFragment"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
 </menu>
