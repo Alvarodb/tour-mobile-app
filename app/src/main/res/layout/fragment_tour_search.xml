@@ -13,33 +13,35 @@
     android:text="Encuentra tu Tour "
     android:textSize="24sp"
     android:textStyle="bold" />
+
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:hint="Name"/>
+        android:hint="@string/tour_name_search" />
+
     <EditText
         android:id="@+id/etDateI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:inputType="date"
         android:clickable="true"
         android:focusable="false"
-        android:hint="Fecha Inicial"
-        android:maxLines="1"/>
+        android:hint="@string/start_date"
+        android:inputType="date"
+        android:maxLines="1" />
 
     <EditText
         android:id="@+id/etDateF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:inputType="date"
         android:clickable="true"
         android:focusable="false"
-        android:hint="Fecha Final"
-        android:maxLines="1"/>
+        android:hint="@string/end_date"
+        android:inputType="date"
+        android:maxLines="1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

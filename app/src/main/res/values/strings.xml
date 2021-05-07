@@ -11,4 +11,11 @@
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="last_name">Last Name</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="tour_name_search">Name</string>
+    <string name="default_tour_title">Title</string>
+    <string name="default_tour_description">Description</string>
+    <string name="default_tour_price">Price</string>
+    <string name="default_tour_opionions">0 opiniones</string>
 </resources>
