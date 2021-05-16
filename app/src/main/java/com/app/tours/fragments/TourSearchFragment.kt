@@ -1,4 +1,4 @@
-package com.app.tours
+package com.app.tours.fragments
 
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.tours.R
+import com.app.tours.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_tour_search.*
 
 

@@ -1,4 +1,4 @@
-package com.app.tours
+package com.app.tours.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import kotlinx.android.synthetic.main.fragment_login.*
+import com.app.tours.R
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
 import java.util.regex.Pattern
@@ -22,7 +22,9 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
-        view.floatingBackButton.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)}
+        view.floatingBackButton.setOnClickListener { Navigation.findNavController(view).navigate(
+            R.id.action_registerFragment_to_loginFragment
+        )}
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

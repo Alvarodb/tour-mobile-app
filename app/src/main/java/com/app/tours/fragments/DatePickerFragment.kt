@@ -1,4 +1,4 @@
-package com.app.tours
+package com.app.tours.fragments
 
 import android.app.DatePickerDialog
 import android.app.Dialog

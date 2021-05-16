@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/tourSearch"
-        android:name="com.app.tours.TourSearch"
+        android:name="com.app.tours.fragments.TourSearch"
         android:label="fragment_tour_search"
         tools:layout="@layout/fragment_tour_search" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.app.tours.LoginFragment"
+        android:name="com.app.tours.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.app.tours.RegisterFragment"
+        android:name="com.app.tours.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -30,17 +30,17 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.app.tours.Favorites"
+        android:name="com.app.tours.fragments.Favorites"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.app.tours.NotificationsFragment"
+        android:name="com.app.tours.fragments.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/reservationsFragment"
-        android:name="com.app.tours.ReservationsFragment"
+        android:name="com.app.tours.fragments.ReservationsFragment"
         android:label="fragment_reservations"
         tools:layout="@layout/fragment_reservations" />
 </navigation>
