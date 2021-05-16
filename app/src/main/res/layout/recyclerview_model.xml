@@ -15,7 +15,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="414dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
@@ -24,6 +24,17 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/image" />
+
+        <com.like.LikeButton
+            android:id="@+id/likebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:icon_size="10dp"
+            app:icon_type="heart" />
 
         <TextView
             android:id="@+id/item_title"
