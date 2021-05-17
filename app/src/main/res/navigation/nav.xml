@@ -18,6 +18,12 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_tourSearch"
+            app:destination="@id/tourSearch" />
+        <action
+            android:id="@+id/action_loginFragment_to_tourSearch2"
+            app:destination="@id/tourSearch" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"

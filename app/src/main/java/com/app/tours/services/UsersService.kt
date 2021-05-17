@@ -12,22 +12,8 @@ import retrofit2.http.POST
 
 
 interface UsersService {
-    @GET("users/"   )
-    fun getUsers(): Call<List<UsersDto>>
 
+    @POST("user/")
+    fun login(@Body user: UsersDto): Call<UsersDto>
 
-    companion object {
-
-        var BASE_URL = "http://ff469c642570.ngrok.io/"
-
-        fun create() : UsersService {
-
-            val retrofit : Retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL)
-                .build()
-            return retrofit.create<UsersService>(UsersService::class.java)
-
-        }
-    }
 }

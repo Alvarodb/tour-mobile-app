@@ -6,11 +6,19 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.app.tours.R
+import com.app.tours.services.ServiceBuilder
+import com.app.tours.services.UsersService
+import com.app.tours.services.dto.UsersDto
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class LoginFragment : Fragment() {
 
@@ -22,7 +30,33 @@ class LoginFragment : Fragment() {
         view.register.setOnClickListener { Navigation.findNavController(view).navigate(
             R.id.action_loginFragment_to_registerFragment
         )}
+        view.login.setOnClickListener {
+            login(view)
+        }
         return view
+    }
+    fun login(view: View) {
+        val apiInterface = ServiceBuilder.buildService(UsersService::class.java)
+
+        apiInterface.login(UsersDto(view.email.text.toString(),view.password.text.toString())).enqueue(object :
+            Callback<UsersDto> {
+            override fun onResponse(call: Call<UsersDto>?, response: Response<UsersDto>?) {
+                if (response?.body() != null) {
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_tourSearch)
+                } else {
+                    val builder = AlertDialog.Builder(activity!!)
+                    builder.setTitle("User is not registered") //add this to string
+                    builder.setMessage("User not found") // add this to string
+                    builder.setPositiveButton("OK") { dialog, which ->
+                    }
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
+                }
+            }
+            override fun onFailure(call: Call<UsersDto>?, t: Throwable?) {
+                t?.printStackTrace()
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
