@@ -1,5 +1,6 @@
 package com.app.tours.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,9 +19,13 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.content.SharedPreferences
+
 
 
 class LoginFragment : Fragment() {
+
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +38,10 @@ class LoginFragment : Fragment() {
         view.login.setOnClickListener {
             login(view)
         }
+        preferences = requireActivity().getSharedPreferences("data",Context.MODE_PRIVATE)
         return view
     }
+
     fun login(view: View) {
         val apiInterface = ServiceBuilder.buildService(UsersService::class.java)
 
@@ -43,6 +50,7 @@ class LoginFragment : Fragment() {
             override fun onResponse(call: Call<UsersDto>?, response: Response<UsersDto>?) {
                 if (response?.body() != null) {
                     Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_tourSearch)
+                    preferences.edit().putString("user_logged",view.email.text.toString()).apply()
                 } else {
                     val builder = AlertDialog.Builder(activity!!)
                     builder.setTitle("User is not registered") //add this to string
@@ -63,6 +71,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         email.addTextChangedListener(loginTextWatcher);
         password.addTextChangedListener(loginTextWatcher);
+        if(preferences.getString("user_logged",null) != null){
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_logoutFragment)
+        }
     }
 
     private val loginTextWatcher: TextWatcher = object : TextWatcher {
