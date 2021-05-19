@@ -26,6 +26,8 @@ class LogoutFragment : Fragment() {
             preferences.edit().remove("user_logged").apply()
             Navigation.findNavController(view).navigate(R.id.action_logoutFragment_to_loginFragment)
         }
+        val userLogged = preferences.getString("user_logged","")
+        view.tvGreeting.text = "Welcome $userLogged !"
         return view
     }
 }

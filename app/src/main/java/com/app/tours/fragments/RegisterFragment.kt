@@ -74,7 +74,6 @@ class RegisterFragment : Fragment() {
                     }
                     val dialog: AlertDialog = builder.create()
                     dialog.show()
-
                 } else {
                     val builder = AlertDialog.Builder(activity!!)
                     builder.setTitle("User alredy exits") //add this to string
@@ -132,37 +131,37 @@ class RegisterFragment : Fragment() {
 
 
             if(country.equals("")){
-                registerCountry.setError("Please enter a country");
+                registerCountry.setError(getResources().getString(R.string.country_empty_error));
             }
             else{
                 registerCountry.setError(null);
             }
             if(birthday.equals("")){
-                registerBirthday.setError("Please enter a country");
+                registerBirthday.setError(getResources().getString(R.string.birthday_empty_error));
             }
             else{
                 registerBirthday.setError(null);
             }
             if(name.equals("")){
-                registerName.setError("Please enter a name");
+                registerName.setError(getResources().getString(R.string.name_empty_error));
             }
             else{
                 registerName.setError(null);
             }
             if(lastName.equals("")){
-                registerLastName.setError("Please enter a last name");
+                registerLastName.setError(getResources().getString(R.string.lastname_empty_error));
             }
             else{
                 registerLastName.setError(null);
             }
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                registerEmail.setError("Please enter a valid email address");
+                registerEmail.setError(getResources().getString(R.string.email_valid_error));
             }
             else{
                 registerEmail.setError(null);
             }
             if (!passwordREGEX.matcher(password).matches()) {
-                registerPassword.setError("Password must contain at least one number, special character and uppercase and lowercase letter");
+                registerPassword.setError(getResources().getString(R.string.password_valid_error));
             }
             else{
                 registerPassword.setError(null);

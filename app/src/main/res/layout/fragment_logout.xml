@@ -23,16 +23,16 @@
 
     <TextView
         android:id="@+id/tvGreeting"
-        android:layout_width="310dp"
-        android:layout_height="57dp"
+        android:layout_width="328dp"
+        android:layout_height="118dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="63dp"
         android:text="@string/greeting"
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/greeting" />

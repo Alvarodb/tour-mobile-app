@@ -20,7 +20,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.content.SharedPreferences
-
+import kotlinx.android.synthetic.main.fragment_register.*
+import java.util.regex.Pattern
 
 
 class LoginFragment : Fragment() {
@@ -84,18 +85,33 @@ class LoginFragment : Fragment() {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             val emailInput: String = email.getText().toString().trim()
             val passwordInput: String = password.getText().toString().trim()
+            val passwordREGEX = Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{8,}" +               //at least 8 characters
+                    "$");
 
             if (passwordInput.equals("")){
-                password.setError("Please enter a name");
+                password.setError(getResources().getString(R.string.password_empty_error));
             }
             else{
                 password.setError(null);
             }
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-                email.setError("Please enter a valid email address");
+                email.setError(getResources().getString(R.string.email_valid_error));
             }
             else{
                 email.setError(null);
+            }
+            if (!passwordREGEX.matcher(passwordInput).matches()) {
+                password.setError(getResources().getString(R.string.password_valid_error));
+            }
+            else{
+                password.setError(null);
             }
             login.setEnabled(email.error == null && password.error == null)
         }

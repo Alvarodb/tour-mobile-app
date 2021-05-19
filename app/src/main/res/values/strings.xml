@@ -19,5 +19,13 @@
     <string name="default_tour_price">Price</string>
     <string name="default_tour_opionions">0 opiniones</string>
     <string name="greeting">Welcome!</string>
+    <string name="password_empty_error">Please enter a password</string>
+    <string name="email_valid_error">Please enter a valid email address</string>
+    <string name="password_valid_error">Password must contain at least one number, special character and uppercase and lowercase letter</string>
+    <string name="country_empty_error">Please enter a country</string>
+    <string name="birthday_empty_error">Please enter a birthday</string>
+    <string name="name_empty_error">Please enter a name</string>
+    <string name="lastname_empty_error">Please enter a last name</string>
     <string name="logout">Logout</string>
 </resources>
+
