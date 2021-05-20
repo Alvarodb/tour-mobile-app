@@ -69,11 +69,13 @@ class RegisterFragment : Fragment() {
                 if (response?.body() == null) {
                     val builder = AlertDialog.Builder(activity!!)
                     builder.setTitle("User Created") //add this to string
-                    builder.setMessage("Click to continue") // add this to string
+                    builder.setMessage("Click to Continue") // add this to string
                     builder.setPositiveButton("OK") { dialog, which ->
                     }
                     val dialog: AlertDialog = builder.create()
                     dialog.show()
+
+                    Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
                 } else {
                     val builder = AlertDialog.Builder(activity!!)
                     builder.setTitle("User alredy exits") //add this to string
