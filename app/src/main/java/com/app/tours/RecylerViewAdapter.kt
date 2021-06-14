@@ -7,18 +7,11 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.app.tours.services.dto.TourDto
 import kotlinx.android.synthetic.main.recyclerview_model.view.*
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
-    private val itemTitles=arrayOf("San Jose Tour", "Heredia Tour", "Alajuela Tour")
+class RecyclerViewAdapter(val results: List<TourDto>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    private val itemDetails= arrayOf("Get to know San Jose!", "Get to know Heredia!", "Get to know Alajuela!")
-
-    private val itemPrices = arrayOf("Desde $120","Desde $200","Desde $50")
-
-    private val itemCalifications = arrayOf(3,2,1)
-
-    private val itemOpinions = arrayOf("5 opiniones","10 opiniones","1 opinion")
 
     private val itemImages=intArrayOf(
         R.drawable.image,
@@ -52,12 +45,14 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textTitle.text = itemTitles[position]
-        holder.textDes.text=itemDetails[position]
-        holder.image.setImageResource(itemImages [position])
-        holder.barCalification.rating = itemCalifications[position].toFloat()
-        holder.textOpinion.text = itemOpinions[position]
-        holder.textPrice.text = itemPrices[position]
+        val tourDto = results?.get(position)
+        holder.textTitle.text = tourDto.name
+        holder.textDes.text=tourDto.description
+        holder.textPrice.text = tourDto.price_for_person
+        holder.image.setImageResource( R.drawable.image)
+        holder.barCalification.rating = tourDto.calification.toFloat()
+
+
 
 
         holder.itemView.setOnClickListener { v:View->
@@ -66,6 +61,6 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun getItemCount(): Int {
-        return itemTitles.size
+        return results.size
     }
 }
