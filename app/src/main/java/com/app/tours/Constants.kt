@@ -1,5 +1,5 @@
 package com.app.tours
 
 object Constants {
-    const val BASE_URL: String = "http://858830dc5788.ngrok.io"
+    const val BASE_URL: String = "http://bd56dd7efa2b.ngrok.io/"
 }

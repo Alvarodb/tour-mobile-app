@@ -9,26 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.app.tours.R
-import com.app.tours.services.ServiceBuilder
-import com.app.tours.services.UsersService
-import com.app.tours.services.dto.RegisterDto
-import com.app.tours.services.dto.UsersDto
-import kotlinx.android.synthetic.main.fragment_login.view.*
+import com.app.tours.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
-import kotlinx.android.synthetic.main.fragment_tour_search.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.regex.Pattern
 
 
 class RegisterFragment : Fragment() {
 
+    private val model: RegisterViewModel by viewModels()
 
     private fun twoDigits(n: Int): String? {
         return if (n <= 9) "0$n" else n.toString()
@@ -52,46 +46,8 @@ class RegisterFragment : Fragment() {
         view.floatingBackButton.setOnClickListener { Navigation.findNavController(view).navigate(
             R.id.action_registerFragment_to_loginFragment
         )}
-        view.registerButton.setOnClickListener {
-            register(view)
-        }
         return view
     }
-
-    fun register(view: View) {
-        val apiInterface = ServiceBuilder.buildService(UsersService::class.java)
-
-        apiInterface.register(RegisterDto(view.registerEmail.text.toString(), view.registerPassword.text.toString(),view.registerName.text.toString()
-        , view.registerLastName.text.toString(), view.registerCountry.text.toString(), view.registerBirthday.text.toString() ,"user"
-        )).enqueue(object :
-            Callback<UsersDto> {
-            override fun onResponse(call: Call<UsersDto>?, response: Response<UsersDto>?) {
-                if (response?.body() == null) {
-                    val builder = AlertDialog.Builder(activity!!)
-                    builder.setTitle("User Created") //add this to string
-                    builder.setMessage("Click to Continue") // add this to string
-                    builder.setPositiveButton("OK") { dialog, which ->
-                    }
-                    val dialog: AlertDialog = builder.create()
-                    dialog.show()
-
-                    Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
-                } else {
-                    val builder = AlertDialog.Builder(activity!!)
-                    builder.setTitle("User alredy exits") //add this to string
-                    builder.setMessage("Email being used") // add this to string
-                    builder.setPositiveButton("OK") { dialog, which ->
-                    }
-                    val dialog: AlertDialog = builder.create()
-                    dialog.show()
-                }
-            }
-            override fun onFailure(call: Call<UsersDto>?, t: Throwable?) {
-                t?.printStackTrace()
-            }
-        })
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         registerBirthday.setOnClickListener {
             showDatePickerDialog(registerBirthday)
@@ -105,7 +61,31 @@ class RegisterFragment : Fragment() {
         registerCountry.addTextChangedListener(registerTextWatcher);
         registerBirthday.addTextChangedListener(registerTextWatcher);
 
+        view.registerButton.setOnClickListener {
+            model.makeApiCallRegister(view.registerEmail.text.toString(), view.registerPassword.text.toString(),view.registerName.text.toString()
+                , view.registerLastName.text.toString(), view.registerCountry.text.toString(), view.registerBirthday.text.toString() ,"user")
+        }
 
+        model.userLiveData.observe(viewLifecycleOwner, Observer {
+            if (it == null) {
+                val builder = AlertDialog.Builder(requireActivity())
+                builder.setTitle("User Created") //add this to string
+                builder.setMessage("Click to continue") // add this to string
+                builder.setPositiveButton("OK") { dialog, which ->
+                }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
+            } else if ( it != null && it.email.isNotEmpty() && it.password.isNotEmpty()){
+                val builder = AlertDialog.Builder(requireActivity())
+                builder.setTitle("User alredy exits") //add this to string
+                builder.setMessage("Email being used") // add this to string
+                builder.setPositiveButton("OK") { dialog, which ->
+                }
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+            }
+        })
 
     }
 
